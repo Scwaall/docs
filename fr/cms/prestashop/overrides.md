@@ -9,6 +9,7 @@ Il est impossible d'overrider un thème depuis un module. Toutefois, les templat
 ## Sommaire
 
 - [Idées](#ideas)
+- [Overrides](#overrides)
 - [Alternatives aux overrides](#overrides-alternatives)
     - [Hooks](#hooks)
     - [Extension de classes](#classes)
@@ -18,6 +19,50 @@ Il est impossible d'overrider un thème depuis un module. Toutefois, les templat
 ## <a id="ideas"></a>Idées
 
 - Modifier les fichiers natifs de PrestaShop en précisant les lignes modifiées via un texte précis et facilement retrouvable via une recherche pour éviter les conflits d'override entre les différents modules.
+
+## <a id="overrides"></a>Overrides
+
+De manière générale, lorsque vous avez recours à un override pour ajouter / modifier / supprimer une fonctionnalité à votre PrestaShop, il vous faudra créer une classe, dans le dossier `override` de PrestaShop, qui héritera de la classe native du CMS :
+
+```php
+<?php
+
+// /override/controllers/front/ProductController.php
+
+if !(defined('_PS_VERSION_')) {
+    exit;
+}
+
+class ProductController extends ProductControllerCore
+{
+    // ...
+
+    /**
+     * @author John Doe <john@doe.com>
+     * @since 2023-09-18 12:16:00
+     */
+    public function initContent()
+    {
+        $this->myFeature();
+
+        parent::initContent();
+    }
+
+    /**
+     * @author John Doe <john@doe.com>
+     * @since 2023-09-18 12:16:00
+     */
+    private function myFeature()
+    {
+        // ...
+    }
+
+    // ...
+}
+```
+
+> **IMPORTANT**<br />
+> Il est fortement recommandé de créer une méthode à part de celle dont vous modifiez le comportement afin de conserver votre script dans le cas où un module ajouterait un override sur la même méthode. Ainsi, vous n'avez qu'à rappeler votre méthode dans celle dont vous souhaitez modifier le comportement.
 
 ## <a id="overrides-alternatives"></a>Alternatives aux overrides
 
