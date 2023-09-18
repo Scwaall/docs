@@ -69,8 +69,11 @@ Si vous souhaitez modifier une `Grid` dans PrestaShop, vous pouvez le faire à l
 - `action<Entity>GridDefinitionModifier` : Permet d'ajouter ou supprimer des colonnes ou des actions dans la `Grid`.
 - `action<Entity>GridQueryBuilderModifier` : Permet de modifier la requête liée à l'entité et d'ajouter des requêtes SQL.
 - `action<Entity>FormBuilderModifier` : Permet de modifier le formulaire de l'entité et d'ajouter des champs additionnels comme les modifier ou ajouter de nouvelles données au formulaire.
-- `actionAfterUpdate<Entity>FormHandler` : Permet d'enregistrer le formulaire de l'entité après sa mise à jour et d'ajouter des champs additionnels comme les modifier ou ajouter de nouvelles données au formulaire.
-- `actionAfterCreate<Entity>FormHandler` : Permet d'enregistrer le formulaire de l'entité après sa création et d'ajouter des champs additionnels comme les modifier ou ajouter de nouvelles données au formulaire.
+- `actionAfterUpdate<Entity>FormHandler` : Permet d'enregistrer le formulaire de l'entité et ses nouvelles données après sa mise à jour.
+- `actionAfterCreate<Entity>FormHandler` : Permet d'enregistrer le formulaire de l'entité et ses nouvelles données après sa création.
+
+> **INFORMATION**<br />
+> Il est également possible de modifier les champs natifs de l'entité. Il n'est cependant pas recommandé de le faire.
 
 ## Menu
 
