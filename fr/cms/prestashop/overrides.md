@@ -104,10 +104,13 @@ Cependant, après avoir testé, il est nécessaire de réécrire l'intégralité
 
 ## <a id="forms"></a>Formulaires (PS 1.7.4+)
 
-Source : https://devdocs.prestashop-project.org/1.7/modules/concepts/forms/admin-forms
+Sources : 
+
+- Documentation PrestaShop : https://devdocs.prestashop-project.org/1.7/modules/concepts/forms/admin-forms
+- Module d'exemple : https://github.com/PrestaShop/example-modules/tree/master/demoextendsymfonyform1
 
 > **ATTENTION**<br />
-> Les exemples fournis dans la documentation de PrestaShop ne semblent pas fonctionner.
+> Les exemples fournis dans la documentation de PrestaShop ne semblent pas fonctionner. Fiez-vous plutôt au dépôt GitHub du module d'exemple cité en source de cette section.
 
 Si vous souhaitez modifier une `Grid` dans PrestaShop, vous pouvez le faire à l'aide des hooks de type :
 
