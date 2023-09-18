@@ -4,7 +4,7 @@
 > PrestaShop recommande de n'avoir recours aux overrides qu'en cas d'extrême nécessité. Le plus souvent, il faudra passer par les alternatives : hooks, héritage des classes natives, décoration des services Symfony. Tout cela, en passant par la création d'un module.
 
 > **INFORMATION**<br/>
-Il est impossible d'overrider un thème depuis un module. Toutefois, les templates des modules ou leur CSS / JS peuvent être modifiés par les thèmes.
+> Il est impossible d'overrider un thème depuis un module. Toutefois, les templates des modules ou leur CSS / JS peuvent être modifiés par les thèmes.
 
 ## Sommaire
 
