@@ -12,6 +12,9 @@
 - [Overrides](#overrides)
 - [Alternatives aux overrides](#overrides-alternatives)
     - [Hooks](#hooks)
+    - [Widgets](#widgets)
+        - [Avantages](#widgets-advantages)
+        - [Templates](#widgets-templates)
     - [Extension de classes](#classes)
 - [Controllers](#controllers)
 - [Formulaires (PS 1.7.4+)](#forms)
@@ -73,6 +76,94 @@ Source : https://devdocs.prestashop-project.org/1.7/modules/concepts/hooks
 Il est possible de greffer un module sur un ou plusieurs hooks disponibles dans le thème du site marchand.
 
 Il est également possible de créer ses propres hooks et de les ajouter dans le thème afin que notre module personnalisé puisse se greffer dessus sans forcément qu'un autre module ne s'y greffe ou ne l'exploite (source : https://devdocs.prestashop-project.org/1.7/modules/concepts/hooks/#going-further-creating-your-own-hook).
+
+### <a id="widgets"></a>Widgets
+
+Source : https://devdocs.prestashop-project.org/1.7/modules/concepts/widgets
+
+Les widgets sont une alternative aux hooks, plus pratique dans le cadre du développement d'un module en cohabitation avec un thème. 
+
+En effet, ceux-ci ne dépendant pas des hooks, ils peuvent être appelés à n'importe quel endroit du thème et autant de fois que nécessaire.
+
+#### <a id="widgets-advantages"></a>Avantages
+
+- Vous n'avez pas besoin de créer de hooks personnalisés.
+- Vous pouvez appeler votre widget à n'importe quel endroit de votre thème.
+- Vous pouvez appeler votre widget autant de fois que nécessaire sur une même page.
+- Le widget est indépendant des hooks et n'est pas impacté par leurs placements ni leur présence.
+- Vous avez la possibilité d'envoyer des variables au module depuis le template du thème et inversement.
+
+#### <a id="widgets-templates"></a>Templates
+
+Voici un exemple de code permettant d'appeler votre widget dans votre thème :
+
+```smarty
+{widget name='mymodule'}
+```
+
+Si votre widget est placé dans un hook, vous pouvez envoyer le nom du hook en paramètre :
+
+```smarty
+{widget name='mymodule' hook='displayLeftColumnProduct'}
+```
+
+Le paramètre `hook` pourra ensuite être récupérée dans votre module :
+
+```php
+<?php
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+class MyModule extends Module
+{
+    // ...
+
+    public function renderWidget(string $hookName, array $configuration)
+    {
+        dump($hookName);
+        // 'displayLeftColumnProduct'
+
+        dump($configuration['hook']);
+        // 'displayLeftColumnProduct'
+    }
+
+    // ...
+}
+```
+
+Enfin, vous pouvez envoyer n'importe quelle variable à votre module :
+
+```smarty
+{widget name='mymodule' product=$product}
+```
+
+Le paramètre `product` pourra ensuite être récupérée dans votre module :
+
+```php
+<?php
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+class MyModule extends Module
+{
+    // ...
+
+    public function renderWidget(string $hookName, array $configuration)
+    {
+        dump($hookName);
+        // null
+
+        dump($configuration['product']);
+        // \PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductLazyArray
+    }
+
+    // ...
+}
+```
 
 ### <a id="classes"></a>Extension de classes
 
