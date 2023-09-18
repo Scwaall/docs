@@ -107,7 +107,7 @@ Si votre widget est placé dans un hook, vous pouvez envoyer le nom du hook en p
 {widget name='mymodule' hook='displayLeftColumnProduct'}
 ```
 
-Le paramètre `hook` pourra ensuite être récupérée dans votre module :
+Le paramètre `hook` pourra ensuite être récupéré dans votre module :
 
 ```php
 <?php
@@ -139,7 +139,7 @@ Enfin, vous pouvez envoyer n'importe quelle variable à votre module :
 {widget name='mymodule' product=$product}
 ```
 
-Le paramètre `product` pourra ensuite être récupérée dans votre module :
+Le paramètre `product` pourra ensuite être récupéré dans votre module :
 
 ```php
 <?php
