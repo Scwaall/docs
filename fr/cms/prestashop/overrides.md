@@ -91,7 +91,7 @@ En effet, ceux-ci ne dépendant pas des hooks, ils peuvent être appelés à n'i
 - Vous pouvez appeler votre widget à n'importe quel endroit de votre thème.
 - Vous pouvez appeler votre widget autant de fois que nécessaire sur une même page.
 - Le widget est indépendant des hooks et n'est pas impacté par leurs placements ni leur présence.
-- Vous avez la possibilité d'envoyer des variables au module depuis le template du thème et inversement.
+- Vous avez la possibilité d'envoyer des variables au module depuis le template du thème.
 
 #### <a id="widgets-templates"></a>Templates
 
