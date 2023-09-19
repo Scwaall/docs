@@ -1,7 +1,7 @@
 # PrestaShop - Overrides
 
 > **ATTENTION**<br />
-> PrestaShop recommande de n'avoir recours aux overrides qu'en cas d'extrême nécessité. Le plus souvent, il faudra passer par les alternatives : hooks, héritage des classes natives, décoration des services Symfony. Tout cela, en passant par la création d'un module.
+> PrestaShop recommande de n'avoir recours aux overrides qu'en cas d'extrême nécessité. Le plus souvent, il faudra passer par les alternatives : hooks, widgets, héritage des classes natives, décoration des services Symfony. Tout cela, en passant par la création d'un module.
 
 > **INFORMATION**<br/>
 > Il est impossible d'overrider un thème depuis un module. Toutefois, les templates des modules ou leur CSS / JS peuvent être modifiés par les thèmes.
@@ -164,6 +164,61 @@ class MyModule extends Module
     // ...
 }
 ```
+
+Pour afficher votre template, il vous faudra appeler la méthode `Module::fetch()` :
+
+```php
+<?php
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+class MyModule extends Module
+{
+    // ...
+
+    public function renderWidget(string $hookName, array $configuration)
+    {
+        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+
+        return $this->fetch('module:' . $this->name . '/views/templates/widget/mymodule.tpl');
+    }
+
+    // ...
+}
+```
+
+La méthode `Module::getWidgetVariables()` est obligatoire et doit renvoyer un tableau (vide ou non) de variables à assigner à Smarty pour le template de votre widget :
+
+```php
+<?php
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
+class MyModule extends Module
+{
+    // ...
+
+    public function getWidgetVariables($hookName, array $configuration)
+    {
+        return [
+            'module_name' => $this->name,
+            'module_version' => $this->version,
+        ];
+    }
+
+    // ...
+}
+```
+
+> **INFORMATION**<br />
+> Les paramètres `$hookName` et `$configuration` sont les mêmes que pour la méthode `Module::renderWidget()`.
+
+> **IMPORTANT**<br />
+> Les variables que vous assignerez à Smarty ne seront accessibles que par votre template et non par le thème.
 
 ### <a id="classes"></a>Extension de classes
 
